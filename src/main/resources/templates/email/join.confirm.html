@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="be">
+<head>
+    <title th:remove="all">Подтверждение регистрации</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<!--<div th:replace="email/fragments/header :: header">HEADER</div>-->
+<h2>
+    Здравствуйте!
+</h2>
+<br>
+Спасибо за регистрацию на нашем сайте, пожалуйста подтвердите её.<br>
+
+<a th:href="@{${siteUrl} + '/join/confirm?email=' + ${email} + '&token=' + ${token}}">
+    Перейдите по этой ссылке.
+</a>
+
+<!--<div th:replace="email/fragments/footer :: footer">FOOTER</div>-->
+</body>
+</html>

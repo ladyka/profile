@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/profile
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: mysecretpassword
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+mail:
+  host: smtp.yandex.ru
+  port: 587
+  protocol: smtp
+  default-encoding: UTF-8
+  username: spam@ladyka.by
+  password: secretpassword
