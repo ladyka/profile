@@ -16,7 +16,7 @@ public class ProfileController {
     private final UsersService usersService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String chats(Model model, Principal principal) {
+    public String profile(Model model, Principal principal) {
         if (principal == null) {
             model.addAttribute("auth", false);
         } else {
@@ -25,6 +25,4 @@ public class ProfileController {
         }
         return "index.html";
     }
-
-
 }
