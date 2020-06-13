@@ -5,6 +5,52 @@
     <title>PROFILE.LADYKA.BY | Главная | Профиль пользователя</title>
 </head>
 <body>
+<div th:if="${auth}">
+    <div>
+        <label for="username"><b>username</b></label>
+        <div id="username" th:text="${dto.username}"></div>
+    </div>
+    <hr>
+    <div>
+        <label for="name"><b>name</b></label>
+        <div id="name" th:text="${dto.name}"></div>
+    </div>
+    <hr>
+    <div>
+        <label for="surname"><b>surname</b></label>
+        <div id="surname" th:text="${dto.surname}"></div>
+    </div>
+    <hr>
+    <div>
+        <label for="email"><b>email</b></label>
+        <div id="email" th:text="${dto.email}"></div>
+    </div>
+    <hr>
+    <div>
+        <label for="phone"><b>phone</b></label>
+        <div id="phone" th:text="${dto.phone}"></div>
+    </div>
+    <hr>
+    <div>
+        <label for="fatherName"><b>fatherName</b></label>
+        <div id="fatherName" th:text="${dto.fatherName}"></div>
+    </div>
+    <hr>
+    <div>
+        <label for="avatar"><b>avatar</b></label>
+        <div id="avatar" th:text="${dto.avatar}"></div>
+    </div>
+    <hr>
+    <div>
+        <label for="birthday"><b>birthday</b></label>
+        <div id="birthday" th:text="${dto.birthday}"></div>
+    </div>
+    <hr>
+</div>
 
+<div th:if="${(!auth)}">
+    <a href="/login">Sing IN</a><br>
+    <a href="/join"><b>Sing UP</b></a>
+</div>`
 </body>
 </html>
