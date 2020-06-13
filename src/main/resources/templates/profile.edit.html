@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="be">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение профиля</title>
+</head>
+<body>
+
+<form action="/profile" method="post">
+    <input type="text" name="username"    th:text="${profile.username}">
+    <input type="text" name="name"        th:text="${profile.name}">
+    <input type="text" name="surname"     th:text="${profile.surname}">
+    <input type="text" name="email"       th:text="${profile.email}">
+    <input type="text" name="phone"       th:text="${profile.phone}">
+    <input type="text" name="fatherName"  th:text="${profile.fatherName}">
+    <input type="text" name="birthday"    th:text="${profile.birthday}">
+
+    <div th:if="${admin}">
+        <input type="hidden" name="id"                  th:text="${profile.id}">
+        <input type="text" name="enabled"               th:text="${profile.enabled}">
+        <input type="text" name="accountNonExpired"     th:text="${profile.accountNonExpired}">
+        <input type="text" name="accountNonLocked"      th:text="${profile.accountNonLocked}">
+        <input type="text" name="credentialsNonExpired" th:text="${profile.credentialsNonExpired}">
+        <input type="text" name="regToken"              th:text="${profile.regToken}">
+    </div>
+
+</form>
+</body>
+</html>
