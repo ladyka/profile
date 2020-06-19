@@ -39,6 +39,14 @@ dependencies {
 	annotationProcessor "org.mapstruct:mapstruct-processor:$mupstructVersion"
 	implementation "org.mapstruct:mapstruct:$mupstructVersion"
 
+
+
+//	implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure'
+	// https://mvnrepository.com/artifact/org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure
+	compile group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.3.0.RELEASE'
+
+//	implementation 'org.springframework.security.oauth:spring-security-oauth2'
+
 }
 
 test {

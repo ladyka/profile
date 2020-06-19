@@ -1,12 +1,12 @@
 package by.ladyka.profile.www;
 
-import by.ladyka.profile.dto.UserInfoDto;
 import by.ladyka.profile.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 
@@ -25,4 +25,10 @@ public class ProfileController {
         }
         return "index.html";
     }
+
+    @RequestMapping("principal")
+    public @ResponseBody Principal principal(Principal principal) {
+        return principal;
+    }
+
 }
