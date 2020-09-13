@@ -23,12 +23,12 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-            .withClient("SampleClientId")
-            .secret(passwordEncoder.encode("secret"))
+            .withClient("ChatClientId")
+            .secret(passwordEncoder.encode("9a94fda0-bd24-4363-b64c-b4864daadea9"))
             .authorizedGrantTypes("authorization_code")
             .scopes("user_info")
             .autoApprove(true)
-            .redirectUris("http://localhost:28002","http://localhost:28002/login","http://localhost:28002/login","http://www.example.com/")
+            .redirectUris("http://im.ladyka.by/","http://localhost:28002/login","http://localhost:28002/login")
          .accessTokenValiditySeconds(999999);
     }
 
