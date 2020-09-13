@@ -28,7 +28,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
             .authorizedGrantTypes("authorization_code")
             .scopes("user_info")
             .autoApprove(true)
-            .redirectUris("http://im.ladyka.by/","http://localhost:28002/login","http://localhost:28002/login")
+            .redirectUris("http://im.ladyka.by/login","http://localhost:28002/login")
          .accessTokenValiditySeconds(999999);
     }
 
