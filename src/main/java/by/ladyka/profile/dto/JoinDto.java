@@ -2,6 +2,8 @@ package by.ladyka.profile.dto;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class JoinDto {
     private String username = "";
@@ -13,4 +15,5 @@ public class JoinDto {
     private String phone = "";
     private String fatherName = "";
     private String avatar = "";
+    private String nickname = UUID.randomUUID().toString();
 }

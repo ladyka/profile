@@ -113,5 +113,8 @@ databaseChangeLog:
         tableName: users
         columns:
         - column:
+            constraints:
+              nullable: false
             name: nickname
             type: VARCHAR(255)
+            defaultValue: 'ladyka'

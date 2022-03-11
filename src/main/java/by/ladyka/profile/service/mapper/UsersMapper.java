@@ -5,6 +5,7 @@ import by.ladyka.profile.dto.UserInfoDto;
 import by.ladyka.profile.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface UsersMapper {
@@ -23,4 +24,6 @@ public interface UsersMapper {
     @Mapping(target = "regToken", expression = "java(java.util.UUID.randomUUID().toString())")
     @Mapping(target = "authorities", ignore = true)
     UserEntity toEntity(JoinDto joinDto);
+
+    void updateEntity(@MappingTarget UserEntity userEntity, UserInfoDto dto);
 }

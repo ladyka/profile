@@ -22,4 +22,11 @@ public class UsersService {
         UserEntity userEntity = userEntityRepository.findByNickname(nickname).orElseThrow();
         return usersMapper.toInfoDto(userEntity);
     }
+
+    public UserInfoDto updateUser(String username, UserInfoDto dto) {
+        UserEntity userEntity = userEntityRepository.findByUsername(username).orElseThrow();
+        usersMapper.updateEntity(userEntity, dto);
+        userEntityRepository.save(userEntity);
+        return usersMapper.toInfoDto(userEntity);
+    }
 }

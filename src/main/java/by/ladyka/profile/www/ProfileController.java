@@ -1,15 +1,18 @@
 package by.ladyka.profile.www;
 
+import by.ladyka.profile.dto.UserInfoDto;
 import by.ladyka.profile.service.UsersService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.time.LocalDate;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class ProfileController {
     private final UsersService usersService;
@@ -25,7 +28,38 @@ public class ProfileController {
         return "index.html";
     }
 
-    @GetMapping(value = "/nickname")
+    @GetMapping(value = "/settings")
+    public String settingsProfile(Model model, Principal principal) {
+        model.addAttribute("dto", usersService.findUser(principal.getName()));
+        return "settings.html";
+    }
+
+    @PostMapping(value = "/settings")
+    public String settingsEditProfile(Model model, Principal principal,
+            LocalDate birthday,
+            String avatar,
+            String email,
+            String fatherName,
+            String name,
+            String nickname,
+            String phone,
+            String surname,
+            String username
+                                     ) {
+        UserInfoDto request = new UserInfoDto(birthday,
+                avatar,
+                email,
+                fatherName,
+                name,
+                nickname,
+                phone,
+                surname,
+                username);
+        model.addAttribute("dto", usersService.updateUser(principal.getName(), request));
+        return "settings.html";
+    }
+
+    @GetMapping(value = "/{nickname}")
     public String publicProfilePage(Model model, Principal principal, @PathVariable String nickname) {
         model.addAttribute("dto", usersService.findUserByNickname(nickname));
         return "profile.html";
