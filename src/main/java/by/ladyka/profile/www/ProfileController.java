@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
-import java.time.LocalDate;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,7 +35,6 @@ public class ProfileController {
 
     @PostMapping(value = "/settings")
     public String settingsEditProfile(Model model, Principal principal,
-            LocalDate birthday,
             String avatar,
             String email,
             String fatherName,
@@ -46,8 +44,7 @@ public class ProfileController {
             String surname,
             String username
                                      ) {
-        UserInfoDto request = new UserInfoDto(birthday,
-                avatar,
+        UserInfoDto request = new UserInfoDto(avatar,
                 email,
                 fatherName,
                 name,
