@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="be" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PROFILE.LADYKA.BY | Главная | Профиль пользователя</title>
+</head>
+<body>
+<div>
+    <label for="nickname"><b>nickname</b></label>
+    <div id="nickname" th:text="${dto.nickname}"></div>
+</div>
+<hr>
+<div>
+    <label for="username"><b>username</b></label>
+    <div id="username" th:text="${dto.username}"></div>
+</div>
+<hr>
+<div>
+    <label for="name"><b>name</b></label>
+    <div id="name" th:text="${dto.name}"></div>
+</div>
+<hr>
+<div>
+    <label for="surname"><b>surname</b></label>
+    <div id="surname" th:text="${dto.surname}"></div>
+</div>
+<hr>
+<div>
+    <label for="email"><b>email</b></label>
+    <div id="email" th:text="${dto.email}"></div>
+</div>
+<hr>
+<div>
+    <label for="phone"><b>phone</b></label>
+    <div id="phone" th:text="${dto.phone}"></div>
+</div>
+<hr>
+<div>
+    <label for="fatherName"><b>fatherName</b></label>
+    <div id="fatherName" th:text="${dto.fatherName}"></div>
+</div>
+<hr>
+<div>
+    <label for="avatar"><b>avatar</b></label>
+    <div id="avatar" th:text="${dto.avatar}"></div>
+</div>
+<hr>
+<div>
+    <label for="birthday"><b>birthday</b></label>
+    <div id="birthday" th:text="${dto.birthday}"></div>
+</div>
+<hr>
+
+<footer>
+    <div align="center">
+        <a href="/">Главная</a>
+    </div>
+</footer>
+</body>
+</html>

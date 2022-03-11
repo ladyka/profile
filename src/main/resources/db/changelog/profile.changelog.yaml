@@ -104,3 +104,14 @@ databaseChangeLog:
             name: version
             type: BIGINT
         tableName: authorities
+
+- changeSet:
+    id: 2022-03-11-nickname
+    author: Ladyka Andrei
+    changes:
+    - addColumn:
+        tableName: users
+        columns:
+        - column:
+            name: nickname
+            type: VARCHAR(255)

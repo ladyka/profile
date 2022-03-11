@@ -1,21 +1,20 @@
 package by.ladyka.profile.www;
 
-import by.ladyka.profile.dto.UserInfoDto;
 import by.ladyka.profile.service.UsersService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class ProfileController {
     private final UsersService usersService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping(value = "/")
     public String profile(Model model, Principal principal) {
         if (principal == null) {
             model.addAttribute("auth", false);
@@ -24,5 +23,11 @@ public class ProfileController {
             model.addAttribute("dto", usersService.findUser(principal.getName()));
         }
         return "index.html";
+    }
+
+    @GetMapping(value = "/nickname")
+    public String publicProfilePage(Model model, Principal principal, @PathVariable String nickname) {
+        model.addAttribute("dto", usersService.findUserByNickname(nickname));
+        return "profile.html";
     }
 }

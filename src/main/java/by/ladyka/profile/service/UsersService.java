@@ -17,4 +17,9 @@ public class UsersService {
         UserEntity userEntity = userEntityRepository.findByUsername(username).orElseThrow();
         return usersMapper.toInfoDto(userEntity);
     }
+
+    public UserInfoDto findUserByNickname(String nickname) {
+        UserEntity userEntity = userEntityRepository.findByNickname(nickname).orElseThrow();
+        return usersMapper.toInfoDto(userEntity);
+    }
 }

@@ -22,6 +22,7 @@ public class UserEntity extends BasicEntity implements UserDetails {
 
     private String username;
     private String password;
+    private String nickname;
     private String name;
     private String surname;
     private String email;
