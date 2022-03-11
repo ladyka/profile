@@ -6,6 +6,10 @@
 </head>
 <body>
 
+<div th:if="${(saved)}">
+    <div align="center">Saved</div>
+</div>
+
 <form action="/settings" method="post">
     <div><label for="nickname"><b>nickname</b></label><input id="nickname" name="nickname" th:value="${dto.nickname}"
                                                              type="text"></div>

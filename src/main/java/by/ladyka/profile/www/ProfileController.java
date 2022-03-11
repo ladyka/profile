@@ -52,6 +52,7 @@ public class ProfileController {
                 phone,
                 surname,
                 username);
+        model.addAttribute("saved", true);
         model.addAttribute("dto", usersService.updateUser(principal.getName(), request));
         return "settings.html";
     }
