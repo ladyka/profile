@@ -1,6 +1,7 @@
 package by.ladyka.profile.www;
 
 import by.ladyka.profile.dto.UserInfoDto;
+import by.ladyka.profile.service.FollowService;
 import by.ladyka.profile.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -8,13 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
 public class ProfileController {
     private final UsersService usersService;
+    private final FollowService followService;
 
     @GetMapping(value = "/")
     public String profile(Model model, Principal principal) {
@@ -59,7 +63,36 @@ public class ProfileController {
 
     @GetMapping(value = "/{nickname}")
     public String publicProfilePage(Model model, Principal principal, @PathVariable String nickname) {
-        model.addAttribute("dto", usersService.findUserByNickname(nickname));
+        UserInfoDto profile = usersService.findUserByNickname(nickname);
+        model.addAttribute("dto", profile);
+        model.addAttribute("myprofile", Objects.equals(principal.getName(), profile.getUsername()));
+        model.addAttribute("followers", followService.countFollowers(nickname));
+        model.addAttribute("follower", followService.countFollower(nickname));
         return "profile.html";
     }
+
+    @GetMapping(value = "/{nickname}/follow")
+    public String followPerson(Model model, Principal principal, @PathVariable String nickname) {
+        followService.follow(principal.getName(), nickname);
+        return publicProfilePage(model, principal, nickname);
+    }
+
+    @GetMapping(value = "/{nickname}/unfollow")
+    public String unfollowPerson(Model model, Principal principal, @PathVariable String nickname) {
+        followService.unfollow(principal.getName(), nickname);
+        return publicProfilePage(model, principal, nickname);
+    }
+
+    @GetMapping(value = "/{nickname}/followers")
+    public @ResponseBody
+    String followers(Model model, Principal principal, @PathVariable String nickname) {
+        return String.valueOf(followService.countFollowers(nickname));
+    }
+
+    @GetMapping(value = "/{nickname}/follower")
+    public @ResponseBody
+    String follower(Model model, Principal principal, @PathVariable String nickname) {
+        return String.valueOf(followService.countFollower(nickname));
+    }
+
 }

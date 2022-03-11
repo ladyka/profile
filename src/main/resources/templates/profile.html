@@ -45,6 +45,18 @@
     <div id="avatar" th:text="${dto.avatar}"></div>
 </div>
 <hr>
+<div align="center">
+    <div><label for="followers"><b>Паслядоўнікі</b> : </label><a id="followers"
+                                                                 th:href="'/' + ${dto.nickname} + '/' + followers"
+                                                                 th:text="${followers}"></a></div>
+    <div><label for="follower"><b>Паслядоўнік</b> : </label><a id="follower"
+                                                               th:href="'/' + ${dto.nickname} + '/' + follower"
+                                                               th:text="${follower}"></a></div>
+    <div th:if="${(!myprofile)}">
+        <a th:href="${'/' + dto.nickname + '/follow'}">Даглядаць</a>
+    </div>
+</div>
+
 
 <footer>
     <div align="center">

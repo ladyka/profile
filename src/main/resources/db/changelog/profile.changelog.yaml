@@ -118,3 +118,20 @@ databaseChangeLog:
             name: nickname
             type: VARCHAR(255)
             defaultValue: 'ladyka'
+
+- changeSet:
+    id: 2022-03-12-followers
+    author: Ladyka Andrei
+    changes:
+    - createTable:
+        columns:
+        - column:
+            name: user_id
+            type: VARCHAR(255)
+        - column:
+            name: follower_id
+            type: VARCHAR(255)
+        - column:
+            name: created_date
+            type: TIMESTAMP WITHOUT TIME ZONE
+        tableName: followers
