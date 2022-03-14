@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="be" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:value="'Feed | PROFILE.LADYKA.BY'"></title>
+</head>
+<body>
+<div th:each="post: ${posts}">
+    <div th:text="${post.author}"></div>
+    <div th:text="${post.createDateTime}"></div>
+    <div th:text="${post.description}"></div>
+</div>
+
+<footer>
+    <div align="center">
+        |
+        <a href="/">Галоўная</a> |
+        <a href="/p/create">Стварыць новы пост</a> |
+        <a href="/settings">Налады</a> |
+        <a href="/logout">Выйсці</a> |
+    </div>
+</footer>
+
+</body>
+</html>

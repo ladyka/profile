@@ -30,6 +30,7 @@ public class UserEntity extends BasicEntity implements UserDetails {
     private String fatherName;
     private String avatar;
     private LocalDate birthday;
+    private String zoneId;
     private boolean enabled;
     private boolean accountNonExpired;
     private boolean accountNonLocked;

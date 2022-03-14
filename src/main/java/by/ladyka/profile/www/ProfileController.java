@@ -1,7 +1,9 @@
 package by.ladyka.profile.www;
 
+import by.ladyka.profile.dto.PostViewDto;
 import by.ladyka.profile.dto.UserInfoDto;
 import by.ladyka.profile.service.FollowService;
+import by.ladyka.profile.service.PostService;
 import by.ladyka.profile.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import java.util.Objects;
 public class ProfileController {
     private final UsersService usersService;
     private final FollowService followService;
+    private final PostService postService;
 
     @GetMapping(value = "/")
     public String profile(Model model, Principal principal) {
@@ -27,6 +30,8 @@ public class ProfileController {
         } else {
             model.addAttribute("auth", true);
             model.addAttribute("dto", usersService.findUser(principal.getName()));
+            model.addAttribute("posts", postService.getFeed(principal.getName()));
+
         }
         return "index.html";
     }
@@ -95,4 +100,25 @@ public class ProfileController {
         return String.valueOf(followService.countFollower(nickname));
     }
 
+    @GetMapping(value = "/p/create")
+    public String create(Model model) {
+        PostViewDto post = new PostViewDto();
+        post.setDescription("Write here !!!");
+        model.addAttribute("post", post);
+        return "post.edit.html";
+    }
+
+    @PostMapping(value = "/p/save")
+    public String save(Model model, Principal principal, String id, String description) {
+        PostViewDto post = postService.save(id, principal.getName(), description);
+        model.addAttribute("post", post);
+        return "post.edit.html";
+    }
+
+    @GetMapping(value = "/p/{postId}")
+    public String postViewPage(Model model, Principal principal, @PathVariable String postId) {
+        PostViewDto post = postService.getViewPost(postId, principal.getName());
+        model.addAttribute("post", post);
+        return "post.view.html";
+    }
 }

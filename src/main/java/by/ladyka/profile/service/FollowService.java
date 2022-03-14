@@ -48,4 +48,8 @@ public class FollowService {
         Optional<FollowerEntity> oFollowRecord = followerRepository.findById(followRecordId);
         oFollowRecord.ifPresent(followerRepository::delete);
     }
+
+    public boolean isFollower(String ownerId, String viewerId) {
+        return followerRepository.existsById(new FollowerEntity.FollowerRecordId(ownerId, viewerId));
+    }
 }

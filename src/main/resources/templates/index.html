@@ -2,55 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="be">
 <head>
     <meta charset="UTF-8">
-    <title>PROFILE.LADYKA.BY | Главная | Профиль пользователя</title>
+    <title>PROFILE.LADYKA.BY | Главная</title>
 </head>
 <body>
+
 <div th:if="${auth}">
     <div>
-        <label for="username"><b>username</b></label>
-        <div id="username" th:text="${dto.username}"></div>
+        <form action="/p/save" method="post">
+            <div><label for="description"><b>description</b></label><textarea cols="80" id="description"
+                                                                              name="description" rows="3"></textarea>
+            </div>
+            <br>
+            <br>
+            <input type="submit" value="Save">
+        </form>
+
     </div>
+
     <hr>
-    <div>
-        <label for="name"><b>name</b></label>
-        <div id="name" th:text="${dto.name}"></div>
+    <div th:each="post: ${posts}">
+        <a th:href="'/' + ${post.author} + '/'">
+            <div th:text="${post.author}"></div>
+        </a>
+        <a th:href="'/p/' + ${post.id} + '/'">
+            <div th:text="${post.createDateTime}"></div>
+        </a>
+        <div th:text="${post.description}"></div>
     </div>
-    <hr>
-    <div>
-        <label for="surname"><b>surname</b></label>
-        <div id="surname" th:text="${dto.surname}"></div>
-    </div>
-    <hr>
-    <div>
-        <label for="email"><b>email</b></label>
-        <div id="email" th:text="${dto.email}"></div>
-    </div>
-    <hr>
-    <div>
-        <label for="phone"><b>phone</b></label>
-        <div id="phone" th:text="${dto.phone}"></div>
-    </div>
-    <hr>
-    <div>
-        <label for="fatherName"><b>fatherName</b></label>
-        <div id="fatherName" th:text="${dto.fatherName}"></div>
-    </div>
-    <hr>
-    <div>
-        <label for="avatar"><b>avatar</b></label>
-        <div id="avatar" th:text="${dto.avatar}"></div>
-    </div>
+
 </div>
 
 <div th:if="${(!auth)}">
     <a href="/login">Sing IN</a>
-        <br>
+    <br>
     <a href="/join"><b>Sing UP</b></a>
 </div>
-<footer>
+
+<footer th:if="${auth}">
     <div align="center">
         |
         <a href="/">Галоўная</a> |
+        <a href="/p/create">Стварыць новы пост</a> |
         <a th:href="${dto.nickname}">Профіль</a> |
         <a href="/settings">Налады</a> |
         <a href="/logout">Выйсці</a> |

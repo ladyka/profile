@@ -17,6 +17,7 @@ public interface UsersMapper {
     @Mapping(target = "createdDate", ignore = true)
     @Mapping(target = "lastModifiedDate", ignore = true)
     @Mapping(target = "birthday", ignore = true)
+    @Mapping(target = "zoneId", ignore = true)
     @Mapping(target = "enabled", constant = "false")
     @Mapping(target = "accountNonExpired", constant = "true")
     @Mapping(target = "accountNonLocked", constant = "true")

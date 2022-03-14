@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="be" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:value="${post.description} + '| PROFILE.LADYKA.BY'"></title>
+</head>
+<body>
+<div>
+    <div th:text="${post.author}"></div>
+    <div th:text="${post.createDateTime}"></div>
+    <div th:text="${post.description}"></div>
+</div>
+</body>
+</html>

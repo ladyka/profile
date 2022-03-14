@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="be" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:value="${post.description} + '| PROFILE.LADYKA.BY'"></title>
+</head>
+<body>
+<div>
+    <form action="/p/save" method="post">
+        <input name="id" th:value="${post.id}" type="hidden">
+        <div><label for="description"><b>description</b></label><input id="description" name="description"
+                                                                       th:value="${post.description}" type="text"></div>
+        <br>
+        <br>
+        <input type="submit" value="Save">
+    </form>
+
+</div>
+
+<footer>
+    <div align="center">
+        |
+        <a href="/">Галоўная</a> |
+        <a href="/p/create">Стварыць новы пост</a> |
+        <a href="/settings">Налады</a> |
+        <a href="/logout">Выйсці</a> |
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,7 +1,9 @@
 package by.ladyka.profile.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -37,6 +39,8 @@ public class FollowerEntity {
     @Getter
     @Setter
     @EqualsAndHashCode
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class FollowerRecordId implements Serializable {
         private String userId;
         private String followerId;
