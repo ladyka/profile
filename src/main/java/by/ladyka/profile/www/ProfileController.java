@@ -1,8 +1,10 @@
 package by.ladyka.profile.www;
 
+import by.ladyka.profile.dto.PostCommentViewDto;
 import by.ladyka.profile.dto.PostViewDto;
 import by.ladyka.profile.dto.UserInfoDto;
 import by.ladyka.profile.service.FollowService;
+import by.ladyka.profile.service.PostCommentService;
 import by.ladyka.profile.service.PostService;
 import by.ladyka.profile.service.UsersService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -22,6 +25,7 @@ public class ProfileController {
     private final UsersService usersService;
     private final FollowService followService;
     private final PostService postService;
+    private final PostCommentService postCommentService;
 
     @GetMapping(value = "/")
     public String profile(Model model, Principal principal) {
@@ -109,16 +113,24 @@ public class ProfileController {
     }
 
     @PostMapping(value = "/p/save")
-    public String save(Model model, Principal principal, String id, String description) {
+    public String savePost(Model model, Principal principal, String id, String description) {
         PostViewDto post = postService.save(id, principal.getName(), description);
         model.addAttribute("post", post);
         return "post.edit.html";
+    }
+
+    @PostMapping(value = "/p/c/save")
+    public String saveComment(Model model, Principal principal, String postId, String message) {
+        postCommentService.save("id", postId, principal.getName(), message);
+        return postViewPage(model, principal, postId);
     }
 
     @GetMapping(value = "/p/{postId}")
     public String postViewPage(Model model, Principal principal, @PathVariable String postId) {
         PostViewDto post = postService.getViewPost(postId, principal.getName());
         model.addAttribute("post", post);
+        List<PostCommentViewDto> comments = postCommentService.getComments(postId, principal.getName());
+        model.addAttribute("comments", comments);
         return "post.view.html";
     }
 }

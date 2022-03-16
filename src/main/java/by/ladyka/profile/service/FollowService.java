@@ -7,6 +7,7 @@ import by.ladyka.profile.repository.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -50,6 +51,6 @@ public class FollowService {
     }
 
     public boolean isFollower(String ownerId, String viewerId) {
-        return followerRepository.existsById(new FollowerEntity.FollowerRecordId(ownerId, viewerId));
+        return Objects.equals(ownerId, viewerId) || followerRepository.existsById(new FollowerEntity.FollowerRecordId(ownerId, viewerId));
     }
 }

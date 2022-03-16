@@ -10,5 +10,30 @@
     <div th:text="${post.createDateTime}"></div>
     <div th:text="${post.description}"></div>
 </div>
+<hr>
+<hr>
+<hr>
+<div th:each="comment: ${comments}">
+    <a th:href="'/' + ${comment.author} + '/'">
+        <div th:text="${comment.author}"></div>
+    </a>
+    <div th:text="${comment.createDateTime}"></div>
+    <div th:text="${comment.message}"></div>
+    <hr>
+</div>
+
+<form action="/p/c/save" method="post">
+    <input name="postId" th:value="${post.id}" type="hidden">
+    <div><label for="message"><b>message</b></label><textarea cols="80" id="message" name="message" rows="3"></textarea>
+    </div>
+    <input type="submit" value="Comment">
+</form>
+<div align="center">
+    |
+    <a href="/">Галоўная</a> |
+    <a href="/p/create">Стварыць новы пост</a> |
+    <a href="/settings">Налады</a> |
+    <a href="/logout">Выйсці</a> |
+</div>
 </body>
 </html>
