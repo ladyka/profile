@@ -9,6 +9,8 @@
     <div th:text="${post.author}"></div>
     <div th:text="${post.createDateTime}"></div>
     <div th:text="${post.description}"></div>
+    <a th:href="'/p/like/' + ${post.id}" th:text="'Likes : '+ ${likes}"></a>
+    <a th:href="'/p/dislike/' + ${post.id}" th:text="'Dislikes : ' + ${dislikes}"></a>
 </div>
 <hr>
 <hr>

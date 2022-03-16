@@ -3,9 +3,11 @@ package by.ladyka.profile.www;
 import by.ladyka.profile.dto.PostCommentViewDto;
 import by.ladyka.profile.dto.PostViewDto;
 import by.ladyka.profile.dto.UserInfoDto;
+import by.ladyka.profile.enums.Reaction;
 import by.ladyka.profile.service.FollowService;
 import by.ladyka.profile.service.PostCommentService;
 import by.ladyka.profile.service.PostService;
+import by.ladyka.profile.service.ReactionsService;
 import by.ladyka.profile.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,7 @@ public class ProfileController {
     private final FollowService followService;
     private final PostService postService;
     private final PostCommentService postCommentService;
+    private final ReactionsService reactionsService;
 
     @GetMapping(value = "/")
     public String profile(Model model, Principal principal) {
@@ -125,10 +128,26 @@ public class ProfileController {
         return postViewPage(model, principal, postId);
     }
 
+    @GetMapping(value = "/p/like/{postId}")
+    public String likePost(Model model, Principal principal, @PathVariable String postId) {
+        reactionsService.makeReaction(principal.getName(), postId, Reaction.LIKE);
+        return postViewPage(model, principal, postId);
+    }
+
+    @GetMapping(value = "/p/dislike/{postId}")
+    public String dislikePost(Model model, Principal principal, @PathVariable String postId) {
+        reactionsService.makeReaction(principal.getName(), postId, Reaction.DISLIKE);
+        return postViewPage(model, principal, postId);
+    }
+
     @GetMapping(value = "/p/{postId}")
     public String postViewPage(Model model, Principal principal, @PathVariable String postId) {
         PostViewDto post = postService.getViewPost(postId, principal.getName());
         model.addAttribute("post", post);
+        long likes = reactionsService.countLikes(postId);
+        model.addAttribute("likes", likes);
+        long dislikes = reactionsService.countDislikes(postId);
+        model.addAttribute("dislikes", dislikes);
         List<PostCommentViewDto> comments = postCommentService.getComments(postId, principal.getName());
         model.addAttribute("comments", comments);
         return "post.view.html";
