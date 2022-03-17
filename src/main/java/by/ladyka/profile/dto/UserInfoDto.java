@@ -16,4 +16,5 @@ public class UserInfoDto {
     private String phone;
     private String surname;
     private String username;
+    private String zoneId;
 }

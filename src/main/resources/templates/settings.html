@@ -30,6 +30,13 @@
     <div><label for="fatherName"><b>fatherName</b></label><input id="fatherName" name="fatherName"
                                                                  th:value="${dto.fatherName}" type="text"></div>
     <br>
+    <div>
+        <label for="zoneId">Choose time Zone:</label>
+        <select id="zoneId" name="zoneId">
+            <option th:each="zoneId: ${zoneIds}" th:selected="${dto.zoneId} == ${zoneId}" th:text="${zoneId}"
+                    th:value="${zoneId}"></option>
+        </select>
+    </div>
     <input type="submit" value="Save">
 </form>
 <footer>

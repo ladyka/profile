@@ -42,9 +42,14 @@
         <input type="tel" id="phone" name="phone" th:value="${dto.phone}">
     </div>
     <div>
-        <label for="avatar">avatar</label>
-        <input type="text" id="avatar" name="avatar" th:value="${dto.avatar}">
+        <label for="zoneId">Choose time Zone:</label>
+        <select id="zoneId" name="zoneId">
+            <option th:each="zoneId: ${zoneIds}" th:selected="${dto.zoneId} == ${zoneId}" th:text="${zoneId}"
+                    th:value="${zoneId}"></option>
+        </select>
     </div>
+
+
     <div>
         <input type="submit" id="submit" name="submit">
     </div>

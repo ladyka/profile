@@ -1,5 +1,6 @@
 package by.ladyka.profile.www;
 
+import by.ladyka.profile.config.ZoneIds;
 import by.ladyka.profile.dto.JoinDto;
 import by.ladyka.profile.exceptions.ApplicationException;
 import by.ladyka.profile.service.UserService;
@@ -25,6 +26,7 @@ public class JoinController {
     public String join(Model model, Principal principal) {
         if (principal == null) {
             model.addAttribute("dto", new JoinDto());
+            model.addAttribute("zoneIds", ZoneIds.zoneIds);
             return "join.html";
         } else {
             return "redirect:/";

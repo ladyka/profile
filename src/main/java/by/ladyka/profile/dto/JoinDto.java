@@ -14,6 +14,6 @@ public class JoinDto {
     private String email = "";
     private String phone = "";
     private String fatherName = "";
-    private String avatar = "";
+    private String zoneId = "";
     private String nickname = UUID.randomUUID().toString();
 }

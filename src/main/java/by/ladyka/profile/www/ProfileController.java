@@ -1,5 +1,6 @@
 package by.ladyka.profile.www;
 
+import by.ladyka.profile.config.ZoneIds;
 import by.ladyka.profile.dto.PostCommentViewDto;
 import by.ladyka.profile.dto.PostViewDto;
 import by.ladyka.profile.dto.UserInfoDto;
@@ -46,12 +47,13 @@ public class ProfileController {
     @GetMapping(value = "/settings")
     public String settingsProfile(Model model, Principal principal) {
         model.addAttribute("dto", usersService.findUser(principal.getName()));
+        model.addAttribute("zoneIds", ZoneIds.zoneIds);
         return "settings.html";
     }
 
     @PostMapping(value = "/settings")
     public String settingsEditProfile(Model model, Principal principal,
-            String avatar,
+            String zoneId,
             String email,
             String fatherName,
             String name,
@@ -60,17 +62,18 @@ public class ProfileController {
             String surname,
             String username
                                      ) {
-        UserInfoDto request = new UserInfoDto(avatar,
+        UserInfoDto request = new UserInfoDto("",
                 email,
                 fatherName,
                 name,
                 nickname,
                 phone,
                 surname,
-                username);
+                username,
+                zoneId);
         model.addAttribute("saved", true);
-        model.addAttribute("dto", usersService.updateUser(principal.getName(), request));
-        return "settings.html";
+        usersService.updateUser(principal.getName(), request);
+        return settingsProfile(model, principal);
     }
 
     @GetMapping(value = "/{nickname}")
